@@ -9,7 +9,7 @@ function App() {
                       "aside main"
                       "aside footer"`}
       gridTemplateColumns={" 80px 1fr"}
-      gridTemplateRows={"40px 1fr 40px"}
+      gridTemplateRows={"45px 1fr 40px"}
       h="500px"
       gap="1"
     >

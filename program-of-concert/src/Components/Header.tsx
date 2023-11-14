@@ -1,12 +1,15 @@
 import { HStack } from "@chakra-ui/react";
-import { IoMdPrint } from "react-icons/io";
+import { Print } from "./Print";
 
 export const Header = () => {
+  function printPage() {
+    window.print();
+  }
   return (
     <div>
       <HStack padding="10px 20px" justifyContent="space-between">
         <h1>Program of concert</h1>
-        <IoMdPrint />
+        <Print printPage={printPage} />
       </HStack>
     </div>
   );
