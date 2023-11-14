@@ -1,5 +1,6 @@
 // import "./App.css";
 import { Grid, GridItem } from "@chakra-ui/react";
+import { Header } from "./Components/Header";
 
 function App() {
   return (
@@ -12,8 +13,8 @@ function App() {
       h="500px"
       gap="1"
     >
-      <GridItem color="black" bg="blue" area={"header"}>
-        Header
+      <GridItem color="white" area={"header"}>
+        <Header />
       </GridItem>
       <GridItem color="black" bg="yellow" area={"main"}>
         Main
