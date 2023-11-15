@@ -1,6 +1,7 @@
 // import "./App.css";
 import { Grid, GridItem } from "@chakra-ui/react";
 import { Header } from "./Components/Header";
+import SetDetails from "./Components/SetDetails";
 
 function App() {
   return (
@@ -8,10 +9,11 @@ function App() {
       templateAreas={`"header header"
                       "aside main"
                       "aside footer"`}
-      gridTemplateColumns={" 80px 1fr"}
+      gridTemplateColumns={"1.5fr 3fr"}
       gridTemplateRows={"45px 1fr 40px"}
-      h="500px"
-      gap="1"
+      h="800px"
+      gap="5"
+      margin="10px"
     >
       <GridItem color="white" area={"header"}>
         <Header />
@@ -22,8 +24,8 @@ function App() {
       <GridItem color="black" bg="white" area={"footer"}>
         Footer
       </GridItem>
-      <GridItem color="black" bg="pink" area={"aside"}>
-        Aside
+      <GridItem color="white" area={"aside"}>
+        <SetDetails />
       </GridItem>
     </Grid>
   );
