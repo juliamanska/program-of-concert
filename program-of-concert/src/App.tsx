@@ -6,10 +6,10 @@ import SetDetails from "./Components/SetDetails";
 function App() {
   return (
     <Grid
-      templateAreas={`"header header"
-                      "aside main"
-                      "aside footer"`}
-      gridTemplateColumns={"1.5fr 3fr"}
+      templateAreas={`" header"
+                      " main"
+                      " footer"`}
+      // gridTemplateColumns={"1.5fr 3fr"}
       gridTemplateRows={"45px 1fr 40px"}
       h="800px"
       gap="5"
@@ -18,15 +18,13 @@ function App() {
       <GridItem color="white" area={"header"}>
         <Header />
       </GridItem>
-      <GridItem color="black" bg="yellow" area={"main"}>
-        Main
+      <GridItem color="white" area={"main"}>
+        <SetDetails onSubmit={() => console.log("submitted")} />
       </GridItem>
       <GridItem color="black" bg="white" area={"footer"}>
         Footer
       </GridItem>
-      <GridItem color="white" area={"aside"}>
-        <SetDetails />
-      </GridItem>
+      {/* <GridItem color="white" area={"aside"}></GridItem> */}
     </Grid>
   );
 }

@@ -1,41 +1,105 @@
-import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
+import { FormControl, FormLabel, HStack, Input, Text } from "@chakra-ui/react";
+import { useState } from "react";
 
-const SetDetails = () => {
+interface Props {
+  onSubmit: (input: string) => void;
+}
+
+const SetDetails = ({ onSubmit }: Props) => {
+  const [formDetails, setFormDetails] = useState({
+    type: "",
+    date: "",
+    teacher: "",
+    accompanist: "",
+    program: "",
+    location: "",
+  });
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormDetails((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    onSubmit(JSON.stringify(formDetails, null, 2));
+  };
+
   return (
     <>
-      <h2>Set Details</h2>
-      <br />
-      <FormControl>
-        <FormLabel>Rodzaj przesłuchania</FormLabel>
-        <Input variant="flushed" placeholder="Przesłuchanie półroczne" />
-
-        <FormLabel>Termin przesłuchania</FormLabel>
-        <Input variant="flushed" placeholder="12.12.2023r. o godz.18:00" />
-
-        <FormLabel>
-          <span>Nauczyciel prowadzący</span>
-        </FormLabel>
-        <Input variant="flushed" placeholder="Anna Nowak" />
-
-        <FormLabel>Akompaniator</FormLabel>
-        <Input variant="flushed" placeholder="Jan Kowalski" />
-
-        <FormLabel>
-          <span>Program</span>
-        </FormLabel>
-        <Input
-          variant="flushed"
-          placeholder="J.Zarębski 'Te rozkwitłe świeżo drzewa' "
-        />
-        <FormLabel>
-          <span>Miejsce przesłuchania</span>
-        </FormLabel>
-        <Input variant="flushed" placeholder="ZSM Gdańsk" />
-        <Button mt="20px" colorScheme="teal">
-          Submit
-        </Button>
-        <ol> Lista utworów</ol>
-      </FormControl>
+      <HStack>
+        <div className="input-container">
+          <h2>Set Details</h2>
+          <br />
+          <FormControl onSubmit={handleSubmit}>
+            <FormLabel>Rodzaj przesłuchania</FormLabel>
+            <Input
+              variant="flushed"
+              placeholder="Przesłuchanie półroczne"
+              name="type"
+              value={formDetails.type}
+              onChange={handleChange}
+            />
+            <FormLabel>Termin przesłuchania</FormLabel>
+            <Input
+              variant="flushed"
+              placeholder="12.12.2023r. o godz.18:00"
+              name="date"
+              value={formDetails.date}
+              onChange={handleChange}
+            />
+            <FormLabel>
+              <span>Nauczyciel prowadzący</span>
+            </FormLabel>
+            <Input
+              variant="flushed"
+              placeholder="Anna Nowak"
+              name="teacher"
+              value={formDetails.teacher}
+              onChange={handleChange}
+            />
+            <FormLabel>Akompaniator</FormLabel>
+            <Input
+              variant="flushed"
+              placeholder="Jan Kowalski"
+              name="accompanist"
+              value={formDetails.accompanist}
+              onChange={handleChange}
+            />
+            <FormLabel>
+              <span>Program</span>
+            </FormLabel>
+            <Input
+              variant="flushed"
+              placeholder="J.Zarębski 'Te rozkwitłe świeżo drzewa' "
+              name="program"
+              value={formDetails.program}
+              onChange={handleChange}
+            />
+            <FormLabel>
+              <span>Miejsce przesłuchania</span>
+            </FormLabel>
+            <Input
+              variant="flushed"
+              placeholder="ZSM Gdańsk"
+              name="location"
+              value={formDetails.location}
+              onChange={handleChange}
+            />
+          </FormControl>
+        </div>
+        <div className="details-container">
+          <Text> Przesłuchanie {formDetails.type}</Text>
+          <Text> Data {formDetails.date}</Text>
+          <Text> Nauczyciel prowadzący {formDetails.teacher}</Text>
+          <Text> Akompaniator {formDetails.accompanist}</Text>
+          <Text> Program {formDetails.program}</Text>
+          <Text> Miejsce {formDetails.location}</Text>
+        </div>
+      </HStack>
     </>
   );
 };
