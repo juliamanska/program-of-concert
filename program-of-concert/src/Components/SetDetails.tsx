@@ -25,6 +25,15 @@ const SetDetails = ({ onSubmit }: Props) => {
     }));
   };
 
+  const dynamicContent = {
+    type: `${formDetails.type}`,
+    date: `${formDetails.date}`,
+    teacher: `${formDetails.teacher}`,
+    accompanist: `${formDetails.accompanist}`,
+    program: `${formDetails.program}`,
+    location: `${formDetails.location}`,
+  };
+
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     onSubmit(JSON.stringify(formDetails, null, 2));
@@ -94,16 +103,8 @@ const SetDetails = ({ onSubmit }: Props) => {
           </FormControl>
         </div>
         <PDFViewer>
-          <MyDocument segmentContent={"lalala"} />
+          <MyDocument dynamicContent={dynamicContent} />
         </PDFViewer>
-        <div className="details-container">
-          <Text> Przesłuchanie {formDetails.type}</Text>
-          <Text> Data {formDetails.date}</Text>
-          <Text> Nauczyciel prowadzący {formDetails.teacher}</Text>
-          <Text> Akompaniator {formDetails.accompanist}</Text>
-          <Text> Program {formDetails.program}</Text>
-          <Text> Miejsce {formDetails.location}</Text>
-        </div>
       </HStack>
     </>
   );

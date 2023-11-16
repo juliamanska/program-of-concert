@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
 });
 
 interface SegmentProps {
-  content: React.ReactNode;
+  content: string;
 }
 
 const Segment = ({ content }: SegmentProps) => {
@@ -23,13 +23,25 @@ const Segment = ({ content }: SegmentProps) => {
 };
 
 interface Props {
-  segmentContent: React.ReactNode;
+  dynamicContent: {
+    type: string;
+    date: string;
+    teacher: string;
+    accompanist: string;
+    program: string;
+    location: string;
+  };
 }
 
-const MyDocument = ({ segmentContent }: Props) => (
+const MyDocument = ({ dynamicContent }: Props) => (
   <Document>
     <Page size="A4" style={styles.page}>
-      <Segment content={segmentContent} />
+      <Segment content={`Przesłuchanie ${dynamicContent.type}`} />
+      <Segment content={`Data ${dynamicContent.date}`} />
+      <Segment content={`Nauczyciel prowadzący ${dynamicContent.teacher}`} />
+      <Segment content={`Akompaniator ${dynamicContent.accompanist}`} />
+      <Segment content={`Program ${dynamicContent.program}`} />
+      <Segment content={`Miejsce ${dynamicContent.location}`} />
     </Page>
   </Document>
 );
