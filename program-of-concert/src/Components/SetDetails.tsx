@@ -1,5 +1,7 @@
 import { FormControl, FormLabel, HStack, Input, Text } from "@chakra-ui/react";
+import { PDFViewer } from "@react-pdf/renderer";
 import { useState } from "react";
+import MyDocument from "./CreatePDF";
 
 interface Props {
   onSubmit: (input: string) => void;
@@ -91,6 +93,9 @@ const SetDetails = ({ onSubmit }: Props) => {
             />
           </FormControl>
         </div>
+        <PDFViewer>
+          <MyDocument segmentContent={"lalala"} />
+        </PDFViewer>
         <div className="details-container">
           <Text> Przesłuchanie {formDetails.type}</Text>
           <Text> Data {formDetails.date}</Text>
