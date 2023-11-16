@@ -13,7 +13,6 @@ function App() {
       gridTemplateRows={"45px 1fr 40px"}
       h="800px"
       gap="5"
-      margin="10px"
     >
       <GridItem color="white" area={"header"}>
         <Header />

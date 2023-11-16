@@ -102,7 +102,9 @@ const SetDetails = ({ onSubmit }: Props) => {
             />
           </FormControl>
         </div>
-        <PDFViewer>
+        <PDFViewer
+          style={{ width: "420px", height: "594px", marginLeft: "30px" }}
+        >
           <MyDocument dynamicContent={dynamicContent} />
         </PDFViewer>
       </HStack>
