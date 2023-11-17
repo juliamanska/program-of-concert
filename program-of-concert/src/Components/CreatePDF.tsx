@@ -88,7 +88,7 @@ const MyDocument = ({ dynamicContent }: Props) => (
         <Segment content={`Akompaniator ${dynamicContent.accompanist}`} />
       </View>
       <View style={styles.program}>
-        <Segment content={`Program ${dynamicContent.program}`} />
+        <Segment content={`Program \n ${dynamicContent.program}`} />
       </View>
       <View style={styles.location}>
         <Segment content={`Miejsce ${dynamicContent.location}`} />

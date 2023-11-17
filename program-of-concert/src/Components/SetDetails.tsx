@@ -1,4 +1,12 @@
-import { FormControl, FormLabel, HStack, Input, Text } from "@chakra-ui/react";
+import {
+  Button,
+  FormControl,
+  FormLabel,
+  HStack,
+  Input,
+  ListItem,
+  OrderedList,
+} from "@chakra-ui/react";
 import { PDFViewer } from "@react-pdf/renderer";
 import { useState } from "react";
 import MyDocument from "./CreatePDF";
@@ -16,6 +24,12 @@ const SetDetails = ({ onSubmit }: Props) => {
     program: "",
     location: "",
   });
+  const [newSong, setNewSong] = useState<string>("");
+  const [songs, setSongs] = useState<string[]>([]);
+
+  const handleSongsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNewSong(event.target.value);
+  };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -30,7 +44,7 @@ const SetDetails = ({ onSubmit }: Props) => {
     date: `${formDetails.date}`,
     teacher: `${formDetails.teacher}`,
     accompanist: `${formDetails.accompanist}`,
-    program: `${formDetails.program}`,
+    program: songs.map((song, index) => `${index + 1}. ${song}`).join("\n"),
     location: `${formDetails.location}`,
   };
 
@@ -39,6 +53,19 @@ const SetDetails = ({ onSubmit }: Props) => {
     onSubmit(JSON.stringify(formDetails, null, 2));
   };
 
+  const addSong = () => {
+    if (newSong.trim() !== "") {
+      setSongs((prevSongs) => [...prevSongs, newSong]);
+      setNewSong(""); // Czyszczenie wartości po dodaniu elementu
+    }
+  };
+
+  const removeSong = (songToRemove: string) => {
+    const newSongsList = songs.filter((song) => {
+      return song !== songToRemove;
+    });
+    setSongs(newSongsList);
+  };
   return (
     <>
       <HStack>
@@ -80,27 +107,42 @@ const SetDetails = ({ onSubmit }: Props) => {
               value={formDetails.accompanist}
               onChange={handleChange}
             />
-            <FormLabel>
-              <span>Program</span>
-            </FormLabel>
+
+            <FormLabel>Program</FormLabel>
             <Input
-              variant="flushed"
-              placeholder="J.Zarębski 'Te rozkwitłe świeżo drzewa' "
-              name="program"
-              value={formDetails.program}
-              onChange={handleChange}
+              type="text"
+              name="item"
+              placeholder="Add a new song"
+              value={newSong}
+              onChange={handleSongsChange}
             />
-            <FormLabel>
-              <span>Miejsce przesłuchania</span>
-            </FormLabel>
-            <Input
-              variant="flushed"
-              placeholder="ZSM Gdańsk"
-              name="location"
-              value={formDetails.location}
-              onChange={handleChange}
-            />
+            <Button onClick={addSong}>Add song</Button>
           </FormControl>
+          <OrderedList>
+            {songs.map((item, index) => (
+              <ListItem key={index}>
+                {item}
+                <Button
+                  fontSize="15px"
+                  margin="2px"
+                  height="30px"
+                  onClick={() => removeSong(item)}
+                >
+                  Delete
+                </Button>
+              </ListItem>
+            ))}
+          </OrderedList>
+          <FormLabel>
+            <span>Miejsce przesłuchania</span>
+          </FormLabel>
+          <Input
+            variant="flushed"
+            placeholder="ZSM Gdańsk"
+            name="location"
+            value={formDetails.location}
+            onChange={handleChange}
+          />
         </div>
         <PDFViewer
           style={{ width: "420px", height: "594px", marginLeft: "30px" }}
