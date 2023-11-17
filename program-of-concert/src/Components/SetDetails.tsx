@@ -3,6 +3,8 @@ import {
   FormControl,
   FormLabel,
   HStack,
+  Heading,
+  Icon,
   Input,
   ListItem,
   OrderedList,
@@ -10,6 +12,7 @@ import {
 import { PDFViewer } from "@react-pdf/renderer";
 import { useState } from "react";
 import MyDocument from "./CreatePDF";
+import deleteIcon from "../assets/delete-icon.svg";
 
 interface Props {
   onSubmit: (input: string) => void;
@@ -70,65 +73,75 @@ const SetDetails = ({ onSubmit }: Props) => {
     <>
       <HStack>
         <div className="input-container">
-          <h2>Set Details</h2>
+          <Heading fontFamily="Times New Roman" size="xl">
+            Set Details
+          </Heading>
           <br />
           <FormControl onSubmit={handleSubmit}>
-            <FormLabel>Rodzaj przesłuchania</FormLabel>
+            <FormLabel mt="15px">Rodzaj przesłuchania</FormLabel>
             <Input
-              variant="flushed"
+              variant="filled"
               placeholder="Przesłuchanie półroczne"
               name="type"
               value={formDetails.type}
               onChange={handleChange}
             />
-            <FormLabel>Termin przesłuchania</FormLabel>
+            <FormLabel mt="15px">Termin przesłuchania</FormLabel>
             <Input
-              variant="flushed"
+              variant="filled"
               placeholder="12.12.2023r. o godz.18:00"
               name="date"
               value={formDetails.date}
               onChange={handleChange}
             />
-            <FormLabel>
+            <FormLabel mt="15px">
               <span>Nauczyciel prowadzący</span>
             </FormLabel>
             <Input
-              variant="flushed"
+              variant="filled"
               placeholder="Anna Nowak"
               name="teacher"
               value={formDetails.teacher}
               onChange={handleChange}
             />
-            <FormLabel>Akompaniator</FormLabel>
+            <FormLabel mt="15px">Akompaniator</FormLabel>
             <Input
-              variant="flushed"
+              variant="filled"
               placeholder="Jan Kowalski"
               name="accompanist"
               value={formDetails.accompanist}
               onChange={handleChange}
             />
 
-            <FormLabel>Program</FormLabel>
-            <Input
-              type="text"
-              name="item"
-              placeholder="Add a new song"
-              value={newSong}
-              onChange={handleSongsChange}
-            />
-            <Button onClick={addSong}>Add song</Button>
+            <FormLabel mt="15px">Program</FormLabel>
+            <HStack>
+              <Input
+                type="text"
+                variant="filled"
+                name="item"
+                placeholder='J.Offenbach "Barcarolle"'
+                value={newSong}
+                onChange={handleSongsChange}
+              />
+              <Button onClick={addSong}>Add song</Button>
+            </HStack>
           </FormControl>
-          <OrderedList>
+          <OrderedList margin="20px">
             {songs.map((item, index) => (
-              <ListItem key={index}>
+              <ListItem
+                key={index}
+                display="flex"
+                justifyContent="space-between"
+                listStyleType="decimal"
+              >
                 {item}
                 <Button
-                  fontSize="15px"
+                  variant="ghost"
                   margin="2px"
                   height="30px"
                   onClick={() => removeSong(item)}
                 >
-                  Delete
+                  X
                 </Button>
               </ListItem>
             ))}
@@ -137,7 +150,7 @@ const SetDetails = ({ onSubmit }: Props) => {
             <span>Miejsce przesłuchania</span>
           </FormLabel>
           <Input
-            variant="flushed"
+            variant="filled"
             placeholder="ZSM Gdańsk"
             name="location"
             value={formDetails.location}
@@ -145,7 +158,7 @@ const SetDetails = ({ onSubmit }: Props) => {
           />
         </div>
         <PDFViewer
-          style={{ width: "420px", height: "594px", marginLeft: "30px" }}
+          style={{ width: "390px", height: "610px", marginLeft: "30px" }}
         >
           <MyDocument dynamicContent={dynamicContent} />
         </PDFViewer>
