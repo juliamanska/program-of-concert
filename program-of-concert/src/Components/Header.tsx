@@ -1,5 +1,6 @@
-import { HStack } from "@chakra-ui/react";
+import { HStack, Heading, Icon } from "@chakra-ui/react";
 import { Print } from "./Print";
+import { BsMusicNoteBeamed } from "react-icons/bs";
 
 export const Header = () => {
   function printPage() {
@@ -7,8 +8,11 @@ export const Header = () => {
   }
   return (
     <div>
-      <HStack padding="10px 20px" justifyContent="space-between">
-        <h1>Program of concert</h1>
+      <HStack p="25px" justifyContent="space-between">
+        <Icon as={BsMusicNoteBeamed} boxSize={6} />
+        <Heading as="h1" fontSize="29px" fontFamily="Times New Roman">
+          Program of audition
+        </Heading>
         <Print printPage={printPage} />
       </HStack>
     </div>
