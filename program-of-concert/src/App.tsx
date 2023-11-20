@@ -33,7 +33,7 @@ function App() {
         p="20px"
         borderRadius="10px"
       >
-        <SetDetails onSubmit={() => console.log("submitted")} />
+        <SetDetails />
       </GridItem>
       <GridItem
         color="black"

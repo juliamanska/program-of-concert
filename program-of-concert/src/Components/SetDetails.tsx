@@ -12,11 +12,7 @@ import { PDFViewer } from "@react-pdf/renderer";
 import { useState } from "react";
 import MyDocument from "./CreatePDF";
 
-interface Props {
-  onSubmit: (input: string) => void;
-}
-
-const SetDetails = ({ onSubmit }: Props) => {
+const SetDetails = () => {
   const [formDetails, setFormDetails] = useState({
     type: "",
     name: "",
@@ -59,11 +55,6 @@ const SetDetails = ({ onSubmit }: Props) => {
     location: `${formDetails.location}`,
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    onSubmit(JSON.stringify(formDetails, null, 2));
-  };
-
   const addSong = () => {
     if (newSong.trim() !== "") {
       setSongs((prevSongs) => [...prevSongs, newSong]);
@@ -85,7 +76,7 @@ const SetDetails = ({ onSubmit }: Props) => {
             Set Details
           </Heading>
           <br />
-          <FormControl onSubmit={handleSubmit}>
+          <FormControl>
             <FormLabel mt="15px">Rodzaj przesłuchania</FormLabel>
             <Input
               variant="filled"
