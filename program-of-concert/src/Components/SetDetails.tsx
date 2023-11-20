@@ -58,14 +58,13 @@ const SetDetails = () => {
   const addSong = () => {
     if (newSong.trim() !== "") {
       setSongs((prevSongs) => [...prevSongs, newSong]);
-      setNewSong(""); // Czyszczenie wartości po dodaniu elementu
+      setNewSong("");
     }
   };
 
-  const removeSong = (songToRemove: string) => {
-    const newSongsList = songs.filter((song) => {
-      return song !== songToRemove;
-    });
+  const removeSong = (index: number) => {
+    const newSongsList = [...songs];
+    newSongsList.splice(index, 1);
     setSongs(newSongsList);
   };
   return (
@@ -147,7 +146,7 @@ const SetDetails = () => {
                   variant="ghost"
                   margin="2px"
                   height="30px"
-                  onClick={() => removeSong(item)}
+                  onClick={() => removeSong(index)}
                 >
                   X
                 </Button>
