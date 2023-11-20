@@ -18,39 +18,32 @@ Font.register({ family: "Poppins", fonts: [{ src: DancingScript }] });
 
 const styles = StyleSheet.create({
   page: {
-    margin: "30px 10px",
-    backgroundColor: "white",
-    justifyContent: "space-around",
-  },
-  section: {
-    marginVertical: 30,
+    marginVertical: 70,
+    justifyContent: "space-between",
   },
   type: {
     fontSize: 30,
     fontFamily: "Poppins",
     alignItems: "center",
   },
-  date: {
-    fontFamily: "Arimo",
-    fontStyle: "italic",
-    alignItems: "center",
-  },
-  teacher: {
+  section: {
     fontFamily: "Arimo",
     alignItems: "center",
-  },
-  accompanist: {
-    fontFamily: "Arimo",
-    alignItems: "center",
+    marginTop: 50,
+    gap: 8,
   },
   program: {
     fontFamily: "Arimo",
     fontStyle: "italic",
-    margin: 100,
+    marginLeft: 100,
+    marginTop: 70,
+    gap: 5,
   },
-  location: {
+  time: {
     fontFamily: "Arimo",
+    fontStyle: "italic",
     alignItems: "center",
+    marginBottom: 110,
   },
 });
 
@@ -61,7 +54,7 @@ interface SegmentProps {
 
 const Segment = ({ content }: SegmentProps) => {
   return (
-    <View style={styles.section}>
+    <View>
       <Text>{content}</Text>
     </View>
   );
@@ -70,6 +63,8 @@ const Segment = ({ content }: SegmentProps) => {
 interface Props {
   dynamicContent: {
     type: string;
+    name: string;
+    class: string;
     date: string;
     teacher: string;
     accompanist: string;
@@ -81,23 +76,25 @@ interface Props {
 const MyDocument = ({ dynamicContent }: Props) => (
   <Document>
     <Page size="A4" style={styles.page}>
-      <View style={styles.type}>
-        <Segment content={`Przesłuchanie ${dynamicContent.type}`} />
+      <View>
+        <View style={styles.type}>
+          <Segment content={`Przesłuchanie ${dynamicContent.type}`} />
+        </View>
+        <View style={styles.section}>
+          <Segment content={` ${dynamicContent.name}`} />
+          <Segment content={`kl.  ${dynamicContent.class}`} />
+          <Segment content={`${dynamicContent.teacher} - nauczyciel`} />
+          <Segment
+            content={`${dynamicContent.accompanist} - przy fortepianie`}
+          />
+        </View>
+        <View style={styles.program}>
+          <Segment content={`Program \n ${dynamicContent.program}`} />
+        </View>
       </View>
-      <View style={styles.teacher}>
-        <Segment content={`${dynamicContent.teacher} - nauczyciel`} />
-      </View>
-      <View style={styles.accompanist}>
-        <Segment content={`${dynamicContent.accompanist} - przy fortepianie`} />
-      </View>
-      <View style={styles.program}>
-        <Segment content={`Program \n ${dynamicContent.program}`} />
-      </View>
-      <View style={styles.date}>
+      <View style={styles.time}>
+        <Segment content={` ${dynamicContent.location}`} />
         <Segment content={`${dynamicContent.date}`} />
-      </View>
-      <View style={styles.location}>
-        <Segment content={`Miejsce ${dynamicContent.location}`} />
       </View>
     </Page>
   </Document>

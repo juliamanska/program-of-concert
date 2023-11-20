@@ -4,7 +4,6 @@ import {
   FormLabel,
   HStack,
   Heading,
-  Icon,
   Input,
   ListItem,
   OrderedList,
@@ -12,7 +11,6 @@ import {
 import { PDFViewer } from "@react-pdf/renderer";
 import { useState } from "react";
 import MyDocument from "./CreatePDF";
-import deleteIcon from "../assets/delete-icon.svg";
 
 interface Props {
   onSubmit: (input: string) => void;
@@ -21,7 +19,9 @@ interface Props {
 const SetDetails = ({ onSubmit }: Props) => {
   const [formDetails, setFormDetails] = useState({
     type: "",
+    name: "",
     date: "",
+    class: "",
     teacher: "",
     accompanist: "",
     program: "",
@@ -44,6 +44,8 @@ const SetDetails = ({ onSubmit }: Props) => {
 
   const dynamicContent = {
     type: `${formDetails.type}`,
+    name: `${formDetails.name}`,
+    class: `${formDetails.class}`,
     date: `${formDetails.date}`,
     teacher: `${formDetails.teacher}`,
     accompanist: `${formDetails.accompanist}`,
@@ -81,17 +83,25 @@ const SetDetails = ({ onSubmit }: Props) => {
             <FormLabel mt="15px">Rodzaj przesłuchania</FormLabel>
             <Input
               variant="filled"
-              placeholder="Przesłuchanie półroczne"
+              placeholder="półroczne"
               name="type"
               value={formDetails.type}
               onChange={handleChange}
             />
-            <FormLabel mt="15px">Termin przesłuchania</FormLabel>
+            <FormLabel mt="15px">Imię i nazwisko</FormLabel>
             <Input
               variant="filled"
-              placeholder="12.12.2023r. o godz.18:00"
-              name="date"
-              value={formDetails.date}
+              placeholder="Anna Nowak"
+              name="name"
+              value={formDetails.name}
+              onChange={handleChange}
+            />
+            <FormLabel mt="15px">Klasa</FormLabel>
+            <Input
+              variant="filled"
+              placeholder="IV śpiewu solowego"
+              name="class"
+              value={formDetails.class}
               onChange={handleChange}
             />
             <FormLabel mt="15px">
@@ -107,7 +117,7 @@ const SetDetails = ({ onSubmit }: Props) => {
             <FormLabel mt="15px">Akompaniator</FormLabel>
             <Input
               variant="filled"
-              placeholder="Jan Kowalski"
+              placeholder="Anna Nowak"
               name="accompanist"
               value={formDetails.accompanist}
               onChange={handleChange}
@@ -156,9 +166,17 @@ const SetDetails = ({ onSubmit }: Props) => {
             value={formDetails.location}
             onChange={handleChange}
           />
+          <FormLabel mt="15px">Termin przesłuchania</FormLabel>
+          <Input
+            variant="filled"
+            placeholder="12.12.2023r. o godz.18:00"
+            name="date"
+            value={formDetails.date}
+            onChange={handleChange}
+          />
         </div>
         <PDFViewer
-          style={{ width: "390px", height: "610px", marginLeft: "30px" }}
+          style={{ width: "440px", height: "650px", marginLeft: "30px" }}
         >
           <MyDocument dynamicContent={dynamicContent} />
         </PDFViewer>
