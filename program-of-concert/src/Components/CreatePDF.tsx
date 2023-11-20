@@ -18,33 +18,39 @@ Font.register({ family: "Poppins", fonts: [{ src: DancingScript }] });
 
 const styles = StyleSheet.create({
   page: {
+    margin: "30px 10px",
     backgroundColor: "white",
+    justifyContent: "space-around",
   },
   section: {
-    margin: 10,
-    padding: 10,
+    marginVertical: 30,
   },
   type: {
-    marginTop: 30,
     fontSize: 30,
     fontFamily: "Poppins",
+    alignItems: "center",
   },
   date: {
     fontFamily: "Arimo",
     fontStyle: "italic",
+    alignItems: "center",
   },
   teacher: {
     fontFamily: "Arimo",
+    alignItems: "center",
   },
   accompanist: {
     fontFamily: "Arimo",
+    alignItems: "center",
   },
   program: {
     fontFamily: "Arimo",
     fontStyle: "italic",
+    margin: 100,
   },
   location: {
     fontFamily: "Arimo",
+    alignItems: "center",
   },
 });
 
@@ -78,17 +84,17 @@ const MyDocument = ({ dynamicContent }: Props) => (
       <View style={styles.type}>
         <Segment content={`Przesłuchanie ${dynamicContent.type}`} />
       </View>
-      <View style={styles.date}>
-        <Segment content={`Data ${dynamicContent.date}`} />
-      </View>
       <View style={styles.teacher}>
-        <Segment content={`Nauczyciel prowadzący ${dynamicContent.teacher}`} />
+        <Segment content={`${dynamicContent.teacher} - nauczyciel`} />
       </View>
       <View style={styles.accompanist}>
-        <Segment content={`Akompaniator ${dynamicContent.accompanist}`} />
+        <Segment content={`${dynamicContent.accompanist} - przy fortepianie`} />
       </View>
       <View style={styles.program}>
         <Segment content={`Program \n ${dynamicContent.program}`} />
+      </View>
+      <View style={styles.date}>
+        <Segment content={`${dynamicContent.date}`} />
       </View>
       <View style={styles.location}>
         <Segment content={`Miejsce ${dynamicContent.location}`} />
