@@ -34,6 +34,12 @@ const SetDetails = ({ onSubmit }: Props) => {
     setNewSong(event.target.value);
   };
 
+  const enterSubmit = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      addSong();
+    }
+  };
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormDetails((prevData) => ({
@@ -132,6 +138,7 @@ const SetDetails = ({ onSubmit }: Props) => {
                 placeholder='J.Offenbach "Barcarolle"'
                 value={newSong}
                 onChange={handleSongsChange}
+                onKeyDown={enterSubmit}
               />
               <Button onClick={addSong}>Add song</Button>
             </HStack>
